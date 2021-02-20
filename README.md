@@ -77,7 +77,7 @@ const config = {
   accessKeyId: "***",
   secretAccessKey: "***",
   region: "us-west-2",
-  adminEmail: "***"
+  adminEmail: "***",
 };
 
 var ses = new AWS.SES(config);
@@ -88,7 +88,7 @@ app.use(bodyParser.json());
 app.use(awsServerlessExpressMiddleware.eventContext());
 
 // Enable CORS for all methods
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -106,7 +106,7 @@ const chargeHandler = async (req, res, next) => {
       source: token.id,
       amount,
       currency,
-      description
+      description,
     });
     if (charge.status === "succeeded") {
       req.charge = charge;
@@ -119,13 +119,13 @@ const chargeHandler = async (req, res, next) => {
   }
 };
 
-const convertCentsToDollars = price => (price / 100).toFixed(2);
+const convertCentsToDollars = (price) => (price / 100).toFixed(2);
 
 const emailHandler = (req, res) => {
   const {
     charge,
     description,
-    email: { shipped, customerEmail, ownerEmail }
+    email: { shipped, customerEmail, ownerEmail },
   } = req;
 
   ses.sendEmail(
@@ -133,12 +133,12 @@ const emailHandler = (req, res) => {
       Source: config.adminEmail,
       ReturnPath: config.adminEmail,
       Destination: {
-      /* add customerEmail and ownerEmail to ToAddresses array after you've moved out of the sandbox for SES */ 
-        ToAddresses: [config.adminEmail]
+        /* add customerEmail and ownerEmail to ToAddresses array after you've moved out of the sandbox for SES */
+        ToAddresses: [config.adminEmail],
       },
       Message: {
         Subject: {
-          Data: "Order Details - AmplifyAgora"
+          Data: "Order Details - AmplifyAgora",
         },
         Body: {
           Html: {
@@ -157,9 +157,7 @@ const emailHandler = (req, res) => {
                 ? `<h4>Mailing Address</h4>
               <p>${charge.source.name}</p>
               <p>${charge.source.address_line1}</p>
-              <p>${charge.source.address_city}, ${
-                    charge.source.address_state
-                  } ${charge.source.address_zip}</p>
+              <p>${charge.source.address_city}, ${charge.source.address_state} ${charge.source.address_zip}</p>
               `
                 : "Emailed product"
             }
@@ -171,10 +169,10 @@ const emailHandler = (req, res) => {
                   : "Check your verified email for your emailed product"
               }
             </p>
-            `
-          }
-        }
-      }
+            `,
+          },
+        },
+      },
     },
     (err, data) => {
       if (err) {
@@ -183,7 +181,7 @@ const emailHandler = (req, res) => {
       res.json({
         message: "Order processed successfully!",
         charge,
-        data
+        data,
       });
     }
   );
@@ -191,7 +189,7 @@ const emailHandler = (req, res) => {
 
 app.post("/charge", chargeHandler, emailHandler);
 
-app.listen(3000, function() {
+app.listen(3000, function () {
   console.log("App started");
 });
 
