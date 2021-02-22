@@ -44,7 +44,7 @@ class App extends React.Component {
 
   oxSignOut = async () => {
     try {
-      const result = await Auth.signOut();
+      await Auth.signOut();
       this.setState({ user: null });
     } catch (err) {
       console.error(err);

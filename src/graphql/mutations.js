@@ -13,6 +13,19 @@ export const createMarket = /* GraphQL */ `
         items {
           id
           description
+          market {
+            id
+            name
+            tags
+            owner
+            createdAt
+            updatedAt
+          }
+          file {
+            bucket
+            region
+            key
+          }
           price
           shipped
           owner
@@ -40,6 +53,19 @@ export const updateMarket = /* GraphQL */ `
         items {
           id
           description
+          market {
+            id
+            name
+            tags
+            owner
+            createdAt
+            updatedAt
+          }
+          file {
+            bucket
+            region
+            key
+          }
           price
           shipped
           owner
@@ -67,6 +93,19 @@ export const deleteMarket = /* GraphQL */ `
         items {
           id
           description
+          market {
+            id
+            name
+            tags
+            owner
+            createdAt
+            updatedAt
+          }
+          file {
+            bucket
+            region
+            key
+          }
           price
           shipped
           owner
@@ -94,6 +133,15 @@ export const createProduct = /* GraphQL */ `
         id
         name
         products {
+          items {
+            id
+            description
+            price
+            shipped
+            owner
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         tags
@@ -126,6 +174,15 @@ export const updateProduct = /* GraphQL */ `
         id
         name
         products {
+          items {
+            id
+            description
+            price
+            shipped
+            owner
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         tags
@@ -158,6 +215,15 @@ export const deleteProduct = /* GraphQL */ `
         id
         name
         products {
+          items {
+            id
+            description
+            price
+            shipped
+            owner
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         tags
@@ -191,6 +257,30 @@ export const registerUser = /* GraphQL */ `
       orders {
         items {
           id
+          product {
+            id
+            description
+            price
+            shipped
+            owner
+            createdAt
+            updatedAt
+          }
+          user {
+            id
+            username
+            email
+            registered
+            createdAt
+            updatedAt
+          }
+          shippingAddress {
+            city
+            country
+            address_line1
+            address_state
+            address_zip
+          }
           createdAt
           updatedAt
         }
@@ -214,6 +304,30 @@ export const updateUser = /* GraphQL */ `
       orders {
         items {
           id
+          product {
+            id
+            description
+            price
+            shipped
+            owner
+            createdAt
+            updatedAt
+          }
+          user {
+            id
+            username
+            email
+            registered
+            createdAt
+            updatedAt
+          }
+          shippingAddress {
+            city
+            country
+            address_line1
+            address_state
+            address_zip
+          }
           createdAt
           updatedAt
         }
@@ -237,6 +351,9 @@ export const createOrder = /* GraphQL */ `
         market {
           id
           name
+          products {
+            nextToken
+          }
           tags
           owner
           createdAt
@@ -259,6 +376,11 @@ export const createOrder = /* GraphQL */ `
         email
         registered
         orders {
+          items {
+            id
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt

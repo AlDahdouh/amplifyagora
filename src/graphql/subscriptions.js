@@ -10,6 +10,19 @@ export const onCreateMarket = /* GraphQL */ `
         items {
           id
           description
+          market {
+            id
+            name
+            tags
+            owner
+            createdAt
+            updatedAt
+          }
+          file {
+            bucket
+            region
+            key
+          }
           price
           shipped
           owner
@@ -34,6 +47,19 @@ export const onUpdateMarket = /* GraphQL */ `
         items {
           id
           description
+          market {
+            id
+            name
+            tags
+            owner
+            createdAt
+            updatedAt
+          }
+          file {
+            bucket
+            region
+            key
+          }
           price
           shipped
           owner
@@ -58,6 +84,19 @@ export const onDeleteMarket = /* GraphQL */ `
         items {
           id
           description
+          market {
+            id
+            name
+            tags
+            owner
+            createdAt
+            updatedAt
+          }
+          file {
+            bucket
+            region
+            key
+          }
           price
           shipped
           owner
@@ -74,14 +113,23 @@ export const onDeleteMarket = /* GraphQL */ `
   }
 `;
 export const onCreateProduct = /* GraphQL */ `
-  subscription OnCreateProduct($owner: String!) {
-    onCreateProduct(owner: $owner) {
+  subscription OnCreateProduct {
+    onCreateProduct {
       id
       description
       market {
         id
         name
         products {
+          items {
+            id
+            description
+            price
+            shipped
+            owner
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         tags
@@ -103,14 +151,23 @@ export const onCreateProduct = /* GraphQL */ `
   }
 `;
 export const onUpdateProduct = /* GraphQL */ `
-  subscription OnUpdateProduct($owner: String!) {
-    onUpdateProduct(owner: $owner) {
+  subscription OnUpdateProduct {
+    onUpdateProduct {
       id
       description
       market {
         id
         name
         products {
+          items {
+            id
+            description
+            price
+            shipped
+            owner
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         tags
@@ -132,14 +189,23 @@ export const onUpdateProduct = /* GraphQL */ `
   }
 `;
 export const onDeleteProduct = /* GraphQL */ `
-  subscription OnDeleteProduct($owner: String!) {
-    onDeleteProduct(owner: $owner) {
+  subscription OnDeleteProduct {
+    onDeleteProduct {
       id
       description
       market {
         id
         name
         products {
+          items {
+            id
+            description
+            price
+            shipped
+            owner
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         tags
