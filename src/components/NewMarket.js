@@ -55,6 +55,28 @@ class NewMarket extends React.Component {
                   }}
                 />
               </h1>
+
+              <Form onSubmit={this.props.handleSearch} inline={true}>
+                <Form.Item>
+                  <Input
+                    onChange={this.props.handleSearchChange}
+                    value={this.props.searchTerm}
+                    placeholder="Search markets ..."
+                    icon="circle-cross"
+                    onIconClick={this.props.handleClearSearch}
+                  />
+                </Form.Item>
+                <Form.Item>
+                  <Button
+                    onClick={this.props.handleSearch}
+                    loading={this.props.isSearching}
+                    type="info"
+                    icon="search"
+                  >
+                    Search
+                  </Button>
+                </Form.Item>
+              </Form>
             </div>
 
             <Dialog

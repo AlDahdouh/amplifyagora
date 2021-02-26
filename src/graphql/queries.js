@@ -13,6 +13,9 @@ export const getMarket = /* GraphQL */ `
           market {
             id
             name
+            products {
+              nextToken
+            }
             tags
             owner
             createdAt
@@ -52,6 +55,19 @@ export const listMarkets = /* GraphQL */ `
           items {
             id
             description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
             price
             shipped
             owner
@@ -81,6 +97,19 @@ export const getProduct = /* GraphQL */ `
           items {
             id
             description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
             price
             shipped
             owner
@@ -121,6 +150,15 @@ export const listProducts = /* GraphQL */ `
           id
           name
           products {
+            items {
+              id
+              description
+              price
+              shipped
+              owner
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           tags
@@ -156,6 +194,19 @@ export const getUser = /* GraphQL */ `
           product {
             id
             description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
             price
             shipped
             owner
@@ -167,6 +218,9 @@ export const getUser = /* GraphQL */ `
             username
             email
             registered
+            orders {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -184,6 +238,59 @@ export const getUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+export const searchMarkets = /* GraphQL */ `
+  query SearchMarkets(
+    $filter: SearchableMarketFilterInput
+    $sort: SearchableMarketSortInput
+    $limit: Int
+    $nextToken: String
+    $from: Int
+  ) {
+    searchMarkets(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+    ) {
+      items {
+        id
+        name
+        products {
+          items {
+            id
+            description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
+            price
+            shipped
+            owner
+            createdAt
+            updatedAt
+          }
+          nextToken
+        }
+        tags
+        owner
+        createdAt
+        updatedAt
+      }
+      nextToken
+      total
     }
   }
 `;

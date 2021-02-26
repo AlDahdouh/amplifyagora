@@ -7,7 +7,7 @@ import { onCreateMarket } from "../graphql/subscriptions";
 import Error from "../components/Error";
 import { Link } from "react-router-dom";
 
-const MarketList = () => {
+const MarketList = ({ searchResults }) => {
   const onNewMarket = (prevQuery, newData) => {
     let updateQuery = { ...prevQuery };
     updateQuery.listMarkets.items = [
@@ -30,11 +30,19 @@ const MarketList = () => {
         if (loading) {
           return <Loading fullscreen={true} />;
         }
-
+        const markets =
+          searchResults.length > 0 ? searchResults : data.listMarkets.items;
         return (
           <>
-            <h2 className="header"> Markets</h2>
-            {data.listMarkets.items.map((market) => (
+            {searchResults.length > 0 ? (
+              <h2 className="text-green">
+                <Icon type="success" name="check" className="icon" />
+                {searchResults.length}
+              </h2>
+            ) : (
+              <h2 className="header"> Markets</h2>
+            )}
+            {markets.map((market) => (
               <div key={market.id} className="my-2">
                 <Card
                   bodyStyle={{

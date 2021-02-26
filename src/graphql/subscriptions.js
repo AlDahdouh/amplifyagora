@@ -13,6 +13,9 @@ export const onCreateMarket = /* GraphQL */ `
           market {
             id
             name
+            products {
+              nextToken
+            }
             tags
             owner
             createdAt
@@ -50,6 +53,9 @@ export const onUpdateMarket = /* GraphQL */ `
           market {
             id
             name
+            products {
+              nextToken
+            }
             tags
             owner
             createdAt
@@ -87,6 +93,9 @@ export const onDeleteMarket = /* GraphQL */ `
           market {
             id
             name
+            products {
+              nextToken
+            }
             tags
             owner
             createdAt
@@ -124,6 +133,19 @@ export const onCreateProduct = /* GraphQL */ `
           items {
             id
             description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
             price
             shipped
             owner
@@ -162,6 +184,19 @@ export const onUpdateProduct = /* GraphQL */ `
           items {
             id
             description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
             price
             shipped
             owner
@@ -200,6 +235,19 @@ export const onDeleteProduct = /* GraphQL */ `
           items {
             id
             description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
             price
             shipped
             owner

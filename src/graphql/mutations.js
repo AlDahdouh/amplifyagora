@@ -16,6 +16,9 @@ export const createMarket = /* GraphQL */ `
           market {
             id
             name
+            products {
+              nextToken
+            }
             tags
             owner
             createdAt
@@ -56,6 +59,9 @@ export const updateMarket = /* GraphQL */ `
           market {
             id
             name
+            products {
+              nextToken
+            }
             tags
             owner
             createdAt
@@ -96,6 +102,9 @@ export const deleteMarket = /* GraphQL */ `
           market {
             id
             name
+            products {
+              nextToken
+            }
             tags
             owner
             createdAt
@@ -136,6 +145,19 @@ export const createProduct = /* GraphQL */ `
           items {
             id
             description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
             price
             shipped
             owner
@@ -177,6 +199,19 @@ export const updateProduct = /* GraphQL */ `
           items {
             id
             description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
             price
             shipped
             owner
@@ -218,6 +253,19 @@ export const deleteProduct = /* GraphQL */ `
           items {
             id
             description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
             price
             shipped
             owner
@@ -260,6 +308,19 @@ export const registerUser = /* GraphQL */ `
           product {
             id
             description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
             price
             shipped
             owner
@@ -271,6 +332,9 @@ export const registerUser = /* GraphQL */ `
             username
             email
             registered
+            orders {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -307,6 +371,19 @@ export const updateUser = /* GraphQL */ `
           product {
             id
             description
+            market {
+              id
+              name
+              tags
+              owner
+              createdAt
+              updatedAt
+            }
+            file {
+              bucket
+              region
+              key
+            }
             price
             shipped
             owner
@@ -318,6 +395,9 @@ export const updateUser = /* GraphQL */ `
             username
             email
             registered
+            orders {
+              nextToken
+            }
             createdAt
             updatedAt
           }
@@ -352,6 +432,15 @@ export const createOrder = /* GraphQL */ `
           id
           name
           products {
+            items {
+              id
+              description
+              price
+              shipped
+              owner
+              createdAt
+              updatedAt
+            }
             nextToken
           }
           tags
@@ -378,6 +467,30 @@ export const createOrder = /* GraphQL */ `
         orders {
           items {
             id
+            product {
+              id
+              description
+              price
+              shipped
+              owner
+              createdAt
+              updatedAt
+            }
+            user {
+              id
+              username
+              email
+              registered
+              createdAt
+              updatedAt
+            }
+            shippingAddress {
+              city
+              country
+              address_line1
+              address_state
+              address_zip
+            }
             createdAt
             updatedAt
           }
